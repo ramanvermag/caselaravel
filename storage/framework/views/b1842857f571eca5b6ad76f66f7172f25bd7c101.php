@@ -12,7 +12,7 @@
 
     <div class="col-lg-11 col-lg-offset-0">
 
-        <form action="/search" method="POST" role="search">
+        <form action="<?php echo e(url('search')); ?>" method="POST" role="search">
             <?php echo e(csrf_field()); ?>
 
 
@@ -67,14 +67,12 @@
                     <th>Sr.</th>
                     <th>Id</th>
                     <th>Image</th>
-
                     <th>Name</th>
                     <th>Gender</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Pincode</th>
-
                     <th>Date/Time Added</th>
                     <th>Roles</th>
                     <th>Status</th>

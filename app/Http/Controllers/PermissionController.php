@@ -15,7 +15,7 @@ class PermissionController extends Controller
 {
     public function __construct() 
     {
-        $this->middleware(['auth', 'isAdmin']);
+        $this->middleware(['auth', 'clearance']);
     }
 
     /**
@@ -39,21 +39,25 @@ class PermissionController extends Controller
     {
         $roles = Role::get();
         $routeCollection = Route::getRoutes();
+
         $route_list = [];
 
         foreach ($routeCollection as $value) 
         {
-            $method = "";
+            $method = [];
 
             foreach ($value->methods() as $method_name) 
             {
-               $method .= $method_name." ";
+               $method[] = $method_name;
             }
                    
-            $route_list[] = ['uri' => $value->uri(), 'method' =>$method ];
+            $route_list[] = [ 'uri' => $value->uri(), 'method' =>$method ];
             
         }
-        return view('permissions.create',  compact('route_list'))->with('roles', $roles);
+
+   
+            array_multisort ( $route_list , SORT_ASC , SORT_REGULAR  );
+            return view('permissions.create',  compact('route_list'))->with('roles', $roles);
     }
 
     /**
@@ -69,45 +73,36 @@ class PermissionController extends Controller
             'name'=>'required|max:40|unique:permissions',
             
         ]);
-
-        $name = $request['name'];
-        $data = input::All();
+        
         $allowed_routes = [];
-        foreach ($data as $key => $value) 
-        {
-           if ($key == '_token' || $key == 'name') 
-           {
-            //...
-           }
-           else
-           {
-                array_push($allowed_routes, $key);
-           }
-        }
+        $name = $request['name'];
+        $Permission_data = input::All();
 
-        $allowed_routes = json_encode($allowed_routes);
-   
-        $permission = new Permission();
+
+
+        unset($Permission_data['name']);
+        unset($Permission_data['_token']);
+
+        $allowed_routes   = json_encode($Permission_data);
+        $permission       = new Permission();
         $permission->name = $name;
         $permission->allowed_routes = $allowed_routes;
 
         $roles = $request['roles'];
-        
+
         $permission->save();
 
-        if (!empty($request['roles'])) 
-        {
-            foreach ($roles as $role) 
-            {
-                $r = Role::where('id', '=', $role)->firstOrFail(); //Match input role to db record
+        // if (!empty($request['roles'])) 
+        // {
+        //     foreach ($roles as $role) 
+        //     {
+        //         $r = Role::where('id', '=', $role)->firstOrFail(); //Match input role to db record
 
-                $permission = Permission::where('name', '=', $name)->first();   
-                $r->givePermissionTo($permission);
-            }
-        }
-
-        return redirect()->route('permissions.index')
-                         ->with('flash_message','Permission'. $permission->name .' added successfully!');
+        //         $permission = Permission::where('name', '=', $name)->first();   
+        //         $r->givePermissionTo($permission);
+        //     }
+        // }
+        return redirect()->route('permissions.index')->with('flash_message','Permission Created successfully!');
     }
 
     /**
@@ -129,30 +124,53 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-
-
-        $roles = Role::get();
+        //$roles = Role::get();
         $routeCollection = Route::getRoutes();
         $route_list = [];
 
+        // foreach ($routeCollection as $value) 
+        // {
+        //     $method_array = $value->methods();
+
+            
+        //     $method = [];
+
+        //     foreach ($method_array as $method_name) 
+        //     {
+        //        $method[] = $method_name;
+        //     }
+                   
+        //     $route_list[] = ['uri' => $value->uri(), 'method' =>$method ];
+                   
+        //     array_push($route_list, ['uri' => $value->uri(), 'method' =>$method ]);
+            
+        // }
+
         foreach ($routeCollection as $value) 
         {
-            $method = "";
+            $method = [];
 
             foreach ($value->methods() as $method_name) 
             {
-               $method .= $method_name." ";
+               $method[] = $method_name;
             }
                    
             $route_list[] = ['uri' => $value->uri(), 'method' =>$method ];
             
         }
 
+   
+        array_multisort ( $route_list , SORT_ASC , SORT_REGULAR  );
+
         $permission = Permission::find($id);
 
-        //return view('permissions.create',  compact('route_list'))->with('roles', $roles);
-        
-        return view('permissions.edit', compact('permission', 'route_list'));
+
+
+        $allowed_routes = json_decode($permission->allowed_routes,true);
+       // print_r($allowed_routes);
+        //die;
+
+        return view('permissions.edit', compact('permission', 'route_list', 'allowed_routes'));
     }
 
     /**
@@ -171,16 +189,74 @@ class PermissionController extends Controller
         ]);
 
 
+    
+        
+        $allowed_routes = [];
+
+        $name = $request['name'];
+        $Permission_data = input::All();
+
+        // print_r($Permission_data);
+        // die;
+        unset($Permission_data['name']);
+        unset($Permission_data['_token']);
+        unset($Permission_data['_method']);
+
+        $allowed_routes = json_encode($Permission_data);
+
+
+        // print_r($allowed_routes);
+        // die;
+
+
+
+        $permission->name = $name;
+        $permission->allowed_routes = $allowed_routes;
+
+        // $roles = $request['roles'];
+        
+        $permission->save();
+
+        return redirect()->route('permissions.index')
+                         ->with('flash_message','Permission "'. $permission->name .'" Updated successfully!');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
         
-        $input = $request->all();
-        $permission->fill($input)->save();
+        // $input = $request->all();
+        // //print_r($input);
 
-        return redirect()->route('permissions.index')
-            ->with('flash_message',
-             'Permission'. $permission->name.' updated!');
+
+        // foreach ($input as $key => $value) 
+        // {
+        //     if (condition) {
+        //         # code...
+        //     }
+        //    echo $key;
+        //    echo "<br>";
+        // }
+        // die("here");
+        // $permission->fill($input)->save();
+
+        // return redirect()->route('permissions.index')
+        //     ->with('flash_message',
+        //      'Permission'. $permission->name.' updated!');
     }
 
     /**

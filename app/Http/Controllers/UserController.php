@@ -18,9 +18,7 @@ class UserController extends Controller
 {
     public function __construct() 
     {
-        $this->middleware(['auth', 'isAdmin']);
-
-
+        $this->middleware(['auth', 'clearance']);
         
     }
     
@@ -34,9 +32,7 @@ class UserController extends Controller
     	
 
         $users = User::where('id','!=', Auth::id())->where('delete_status','!=', 1)->with('roles')->paginate(10); 
-
         $roles = Role::get();   
-        
         return view('users.index', compact('users', 'roles'));
     }
 
@@ -51,15 +47,15 @@ class UserController extends Controller
 
         $created_at = (array)$user_data->created_at;
 
-        $user_properties['id']     = $user_data->id;
-        $user_properties['name']   = $user_data->name;
-        $user_properties['email']  = $user_data->email;
-        $user_properties['phone']  = $user_data->phone;
-        $user_properties['gender'] = $user_data->gender;
-        $user_properties['status'] = $user_data->status;
+        $user_properties['id']      = $user_data->id;
+        $user_properties['name']    = $user_data->name;
+        $user_properties['email']   = $user_data->email;
+        $user_properties['phone']   = $user_data->phone;
+        $user_properties['gender']  = $user_data->gender;
+        $user_properties['status']  = $user_data->status;
         $user_properties['address'] = $user_data->residential_address;
         $user_properties['pincode'] = $user_data->pincode;
-        $user_properties['gender'] = $user_data->gender;
+        $user_properties['gender']  = $user_data->gender;
 
         $user_properties['created_at']      = $created_at['date'];
         $user_properties['profile_picture'] = $user_data->profile_picture;
@@ -73,8 +69,8 @@ class UserController extends Controller
 
         $user_properties['roles'] = $user_roles;
 
-        //print_r($user_properties);
-        //die;
+        // print_r($user_properties);
+        // die;
 
         return view('users.profile', ['properties' => $user_properties]);
     }
@@ -104,7 +100,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name'                => 'required',
             'email'               => 'required|email|unique:users',
-            'phone'               => 'required|regex:/[0-9]/|size:10|unique:users',
+            'phone'               => 'required|regex:/[0-9]/|size:10',
             'residential_address' => 'required',
             'pincode'             => 'required|numeric|digits_between:0,6',
             'dob'                 => 'required|date',
@@ -117,33 +113,39 @@ class UserController extends Controller
 
         $roles = $request['roles'];
 
-        if (isset($roles)) 
+        if (!empty($roles)) 
         {
-
             foreach ($roles as $role) 
             {
-                $role_r = Role::where('id', '=', $role)->firstOrFail();            
+                $role_r = Role::where('id', '=', $role)->first();            
                 $user->assignRole($role_r);
             }
         }
-        elseif(!isset($roles))
+        else
         {
 
-            $default_role = "Simpleuser";
+            $default_role = "user";
 
-            $role_r = Role::where('name', '=', $default_role)->firstOrFail();            
+            $role_r = Role::where('name', '=', $default_role)->first();  
+            // print_r($role_r);
+            // die;          
             $user->assignRole($role_r);
 
         } 
 
         $user = User::where('email', $request->email) -> first();
 
+
+        
+
         
 
         if ($request->profile_picture) 
         { 
+
+          // die('hgfdhgfdjghg');
             $profile_picture_directory = public_path('user_profile_pics/'.$user->id);
-            
+            // echo $profile_picture_directory = public_path('user_profile_pics/5');
             $profile_picture_name = md5(uniqid().time()).'.'.$request->profile_picture->getClientOriginalExtension();
 
 
@@ -156,14 +158,18 @@ class UserController extends Controller
                 mkdir($profile_picture_directory);
                 chmod($profile_picture_directory, 0777); 
                 mkdir($profile_picture_directory.'/profile');
+                chmod($profile_picture_directory."/profile", 0777); 
             }          
             
             Image::make($request->profile_picture)->fit(120, 150 )->save($profile_picture_directory.'/profile/'.$profile_picture_name);
+            // die;
 
             
             $input = ["profile_picture" => $profile_picture_name];
 
             $user->fill($input)->save();
+            // return redirect()->route('users.index')
+            //              ->with('flash_message', 'User successfully added.');
         }
 
 

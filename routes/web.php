@@ -24,7 +24,11 @@ use Spatie\Permission\Models\Role;
 
 	Auth::routes();
 
-    Route::get('/','PostController@index')->name('home');
+    // Route::get('/','PostController@index')->name('home');
+    
+    Route::get('/','DashboardController@index');
+
+
 
     Route::get('delete/{id}','UserController@delete');
     Route::get('deactivateUser/{id}','UserController@deactivateUser');

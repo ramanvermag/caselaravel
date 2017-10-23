@@ -151,10 +151,13 @@
                 </div>
             <!-- </div> -->
         <?php endif; ?> 
+        <div class="container">
+            
         <div class="row">
             <div class="col-md-8 col-md-offset-2">              
                 <?php echo $__env->make('errors.list', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
             </div>
+        </div>
         </div>
 
         <?php echo $__env->yieldContent('content'); ?>

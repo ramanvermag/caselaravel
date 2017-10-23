@@ -5,29 +5,16 @@
 @section('content')
 
 <div class="col-lg-10 col-lg-offset-1">
-    <h1><i class="fa fa-key"></i>Available Permissions
+    <h3>Available Permissions
 
     <a href="{{ route('users.index') }}" class="btn btn-default pull-right">Users</a>
-    <a href="{{ route('roles.index') }}" class="btn btn-default pull-right">Roles</a></h1>
+    <a href="{{ route('roles.index') }}" class="btn btn-default pull-right">Roles</a></h3>
     <hr>
     <div class="table-responsive">
-
-
     <div>
-
-
-           <!--  @foreach ($permissions as $permission)
-                       {{ $permission->name }},
-            @endforeach
-       
-            this user have these permessions    --> 
-       
     </div>
 
-
-
         <table class="table table-bordered table-striped">
-
             <thead>
                 <tr>
                     <th>Permissions</th>
@@ -52,7 +39,7 @@
         </table>
     </div>
 
-    <a href="{{ URL::to('permissions/create') }}" class="btn btn-success">Add Permission</a>
+    <a href="{{ URL::to('permissions/create') }}" class="btn btn-success">Create Permission</a>
 
 </div>
 

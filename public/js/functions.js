@@ -195,53 +195,6 @@ $(document).ready(function()
     });
 
 
-	//upload image before creating user
-
-
-	// $('#create-user-form').submit(function(e) 
-	// {
- //  		var name 	= $('#name');
- //  		var email   = $('#email');
- //  		var phone 	= $('#phone');
- //  		var address = $('#address');
- //  		var pincode = $('#pincode');
- //  		var dob 	= $('#dob');
- //  		var pwd 	= $('#pwd');
- //  		var cpwd 	= $('#cpwd');
- //  		var regexemail   = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  			
- //  		//alert("1");
-
- //  		if (name.val() 	  != "" && 
- //  			email.val()   != "" && 
- //  			phone.val()   != "" && 
- //  			address.val() != "" && 
- //  			pincode.val() != "" && 
- //  			dob.val() 	  != "" && 
- //  			pwd.val() 	  != "" && 
- //  			cpwd.val()	  != "")
- //  		{
- //  		//alert("2");
- //  		//alert(regexemail.test(email.val()));
-
-
- //  			if (regexemail.test(email.val())) 
- //  			{
- //  				//alert("3");
-				
-				
-	// 			$(".overlay").show();
-
-				
-				
-				
-
- //  			}
-
- //  		}
-
-	// });
-
 	$('.create-permission-submit').click(function(){
 
 	    $('#select-to option').prop('selected', true);
@@ -278,7 +231,51 @@ $(document).ready(function()
 
 	});
 
-	// 
+	
+	$('#create-permission-submit').click(function() 
+	{
+      checked = $(".route-name-input:checked").length;
+
+
+      if(!checked) {
+        alert("You must allow at least one Route to create a permission.");
+        return false;
+      }
+
+    });
+
+    $('#update-permission-submit').click(function() 
+	{
+      checked = $(".route-name-input:checked").length;
+
+
+      if(!checked) {
+        alert("You must allow at least one Route to create a permission.");
+        return false;
+      }
+
+    });
+
+
+    // $("$selectAllRouts")
+
+    $('#selectallroutscheckbox').click(function(event) 
+	{ 
+		if(this.checked) 
+		{
+			$(':checkbox').each(function() 
+			{
+				this.checked = true;
+			});			
+		}
+		else
+		{
+			$(':checkbox').each(function() 
+			{
+				this.checked = false;                        
+			});
+		}
+	});
 
 
 

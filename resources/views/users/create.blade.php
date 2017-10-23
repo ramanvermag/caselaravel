@@ -11,10 +11,9 @@
             </div>
             {{-- @include ('errors.list') --}}
 
-
         
             {{ Form::open(array('url' => 'users', 'id' => "create-user-form", 'enctype' => 'multipart/form-data')) }}
-
+             {{ csrf_field() }}
                 <div class="col-md-4">
                     <div class="form-group">
 
@@ -60,7 +59,8 @@
 
                         <div class='input-group date'>
                     {{ Form::text('dob', '', array('name'=>'dob', "id"=>"datepicker", 'class' => 'form-control', 'placeholder' => 'D.O.B')) }}                    
-                           <!--  <input name="dob" id="datepicker" type='text' class="form-control" data-provide="datepicker" placeholder="D.O.B" /> -->
+                           <!--  
+                            <input name="dob" id="datepicker" type='text' class="form-control" data-provide="datepicker" placeholder="D.O.B" /> -->
                             <span class="input-group-addon datepicker-icon">
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>

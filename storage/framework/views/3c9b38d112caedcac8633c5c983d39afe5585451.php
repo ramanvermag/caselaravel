@@ -29,11 +29,11 @@
 
                     <td><?php echo e($role->permissions()->pluck('name')->implode(' ,  ')); ?></td>
                     <td>
-                    <a href="<?php echo e(URL::to('roles/'.$role->id.'/edit')); ?>" class="btn-edit-cl" style="margin-right: 3px;">Edit</a>
+                    <a href="<?php echo e(URL::to('roles/'.$role->id.'/edit')); ?>" class="btn-edit-cl btn-info" style="margin-right: 3px;">Edit</a>
 
                     <?php echo Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id] ]); ?>
 
-                    <?php echo Form::submit('Delete', ['class' => 'btn-delete-cl']); ?>
+                    <?php echo Form::submit('Delete', ['class' => 'btn-delete-cl btn btn-danger']); ?>
 
                     <?php echo Form::close(); ?>
 

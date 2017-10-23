@@ -31,10 +31,10 @@
 
                     <td>{{  $role->permissions()->pluck('name')->implode(' ,  ') }}</td>{{-- Retrieve array of permissions associated to a role and convert to string --}}
                     <td>
-                    <a href="{{ URL::to('roles/'.$role->id.'/edit') }}" class="btn-edit-cl" style="margin-right: 3px;">Edit</a>
+                    <a href="{{ URL::to('roles/'.$role->id.'/edit') }}" class="btn-edit-cl btn-info" style="margin-right: 3px;">Edit</a>
 
                     {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id] ]) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn-delete-cl']) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn-delete-cl btn btn-danger']) !!}
                     {!! Form::close() !!}
 
                     </td>

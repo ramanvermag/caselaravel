@@ -3,29 +3,16 @@
 <?php $__env->startSection('content'); ?>
 
 <div class="col-lg-10 col-lg-offset-1">
-    <h1><i class="fa fa-key"></i>Available Permissions
+    <h3>Available Permissions
 
     <a href="<?php echo e(route('users.index')); ?>" class="btn btn-default pull-right">Users</a>
-    <a href="<?php echo e(route('roles.index')); ?>" class="btn btn-default pull-right">Roles</a></h1>
+    <a href="<?php echo e(route('roles.index')); ?>" class="btn btn-default pull-right">Roles</a></h3>
     <hr>
     <div class="table-responsive">
-
-
     <div>
-
-
-           <!--  <?php $__currentLoopData = $permissions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $permission): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                       <?php echo e($permission->name); ?>,
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-       
-            this user have these permessions    --> 
-       
     </div>
 
-
-
         <table class="table table-bordered table-striped">
-
             <thead>
                 <tr>
                     <th>Permissions</th>
@@ -53,7 +40,7 @@
         </table>
     </div>
 
-    <a href="<?php echo e(URL::to('permissions/create')); ?>" class="btn btn-success">Add Permission</a>
+    <a href="<?php echo e(URL::to('permissions/create')); ?>" class="btn btn-success">Create Permission</a>
 
 </div>
 

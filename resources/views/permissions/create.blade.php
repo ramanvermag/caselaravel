@@ -8,131 +8,91 @@
 
     {{-- @include ('errors.list') --}}
 
+
+        <?php 
+            foreach ($route_list as  $singleAppRouteData) 
+            {	
+                $appRouteName    = $singleAppRouteData['uri'];
+                $appRouteMethods = $singleAppRouteData['method'];
+
+                foreach ($appRouteMethods as $methodName) 
+                {
+                    $appCompleteRouteNames[] = $appRouteName."@".$methodName;
+                }
+            }
+        ?>
+
+
+
+
     <h3>Create Permission</h3>
- 
-    {{ Form::open(array('url' => 'permissions')) }}
-
-    <div class="form-group">
-        {{ Form::label('name', 'Permission Name') }}
-        {{ Form::text('name', '', array('class' => 'form-control', 'placeholder'=>"Enter Permission name...")) }}
-    </div>
-    <br>
-
-    <div class="form-group">
-        {{ Form::label('name', ' Select allowed Route(s)') }}
-       <fieldset>
-
-    <!--     <div class="col-md-12">
-        </div>
-
-        <div class="col-md-6">
-            <div class="row">
-                <div class="route-list-wrapper">
-                    <h5>All available Routes</h5>
-                        <select name="selectfrom" id="select-from" multiple size="10">
-
-                            <?php foreach($route_list as $route): ?>
-
-                                <option value="<?php  echo $route['uri']; ?>">
-
-                                 <?php  echo $route['uri']." (";  echo $route['method'].")"; ?>
-                                     
-                                </option>
-                            
-                            <?php endforeach; ?>                        
-                            
-                        </select>
-                        
-                        <a href="JavaScript:void(0);" id="btn-add">Add &raquo;</a>
-                    
-                    </div>
-                </div>
-        </div>
- 
-        <div class="col-md-6">
-            <div class="row">
-                <div class="route-list-wrapper">
-
-                    <h5>Allowed Routes</h5>
 
 
 
-                    
-                    <select name="selectto[]" id="select-to" multiple size="10">
 
-                    </select>
-                    
-                    <a href="JavaScript:void(0);" id="btn-remove">&laquo; Remove </a>
-                
-                </div>
-        </div> -->
 
-                <div class="route-list-wrapper">
-                    
+     
+            
+            <!-- {{ Form::label('name', ' Select allowed Route(s)') }} -->
+
+            <div class="route-list-wrapper">
                 <div class="col-md-12">
                     <div class="row">
                     <h5>All available Routes</h5>
 
-                        
-                        
+                    <ul class="routlist">
+                        <li>
 
-                            <?php foreach($route_list as $route): ?>
-                                
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        
+                            <input class="route-name-input" type="checkbox" id="selectallroutscheckbox" name="selectAll">
 
-                                    <?php $route_name   = $route['uri']; $method = $route['method'];  ?>
+                            <label class="route-name" for="selectallroutscheckbox">
 
+                            <span>Select All </span>
 
-                                    <input class="route-name-input" type="checkbox" name="<?php echo $route_name; ?>" id="{{ $route_name }}{{$method}}">
-                                        
-                                        <label class="route-name" for="{{ $route_name }}{{$method}}">
-                                           {{ $route_name }}  <em>{{$method}}</em>
-                                        </label>
+                            </label>
 
-                                    </div>
+                        </li>
+                    </ul>
+                    <a class="all-permissions-view" href="{{url('permissions')}}">All Permission</a>
+                        {{ Form::open(array('url' => 'permissions')) }}
 
 
+                        {{ Form::label('name', 'Permission Name') }}
 
-                                </div>
+                        {{ Form::text('name', '', array('class' => 'form-control', 'placeholder'=>"Enter Permission name...")) }}
 
-                            <?php endforeach; ?>                        
-                            
-                        
-                        <!-- <a href="JavaScript:void(0);" id="btn-add">Add &raquo;</a> -->
-                    
+                        <ul class="routlist">
+                            <?php 
+
+                                $sr =  0;
+                                foreach ($appCompleteRouteNames as $key => $value) 
+                                {
+                                    $sr++;
+                                    $routeData = explode('@', $value);
+                                    $routeName   = $routeData[0]; 
+                                    $routeMethod = $routeData[1];
+                                    ?>
+                                    <li>
+                                        <span class="sr-no-route">[<?php echo $sr; ?>] </span>
+
+                                        <input id="{{$value}}" class="route-name-input" id="{{$value}}"  type="checkbox" name="{{$value}}">
+                                        <label class="route-name" for="{{$value}}"><span> {{$routeName}}</span> <em>{{$routeMethod}}</em></label>
+                                    </li>
+                                    <?php
+                                }
+                            ?>
+                        </ul>
+
+                        {{ Form::submit('Create Permission', array('id'=>"create-permission-submit", 'class' => 'btn btn-primary create-permission-submit')) }}
+                        {{ Form::close() }}
+
+
                     </div>
                 </div>
-        </div>
- 
-
- 
-  </fieldset>
-    </div>
-   
-
-    @if(!$roles->isEmpty())
-
-        <h4>Assign Permission to Roles</h4>
+            </div>
+      
 
 
-        @foreach ($roles as $role)
-
-            {{ Form::checkbox('roles[]',  $role->id ) }}
-            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
-
-        @endforeach
-
-    @endif
-
-    
-    <br>
-    {{ Form::submit('Create Permission', array('class' => 'btn btn-primary create-permission-submit')) }}
-
-    {{ Form::close() }}
-    <br>
 
 </div>
-
 @endsection

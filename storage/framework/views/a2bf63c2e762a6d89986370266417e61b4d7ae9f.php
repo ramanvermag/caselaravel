@@ -9,10 +9,10 @@
             </div>
             
 
-
         
             <?php echo e(Form::open(array('url' => 'users', 'id' => "create-user-form", 'enctype' => 'multipart/form-data'))); ?>
 
+             <?php echo e(csrf_field()); ?>
 
                 <div class="col-md-4">
                     <div class="form-group">
@@ -107,7 +107,7 @@
 
                             <?php echo e(Form::label($role->name, ucfirst($role->name))); ?><br>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <em class="user-msg">if you not asign any Role to user then default user role would be <b>simpleuser</b></em>
+                        <em class="user-msg">if you not asign any Role to user then default user role would be <b>User</b></em>
                     </div>
                 </div>
                 
