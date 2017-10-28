@@ -406,3 +406,33 @@ input#create-permission-submit {
 .right-content-area {background: rgba(0, 0, 0, 0.01) none repeat scroll 0 0;padding: 10px}
 .left-menu > ul {list-style: outside none none;margin: 0;padding: 0;}
 .left-menu a {border-bottom: 1px solid rgba(0, 0, 0, 0.05);display: block;padding: 5px 0 5px 30px;}
+nav.navbar{background: #328aff;box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);}
+.navbar-header .navbar-brand {color: #ffffff;}
+.left-menu {border-right: 1px solid rgba(0, 0, 0, 0.1);height: 100vh;margin-top: -52px;padding-top: 52px;background: rgba(0, 0, 0, 0.05) none repeat scroll 0 0;}
+.nav .dropdown .dropdown-toggle {color: #ffffff;}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    background-color: #3b7ff8;
+    color: #555555;
+}
+.login-page .panel.panel-default {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+    margin: 50px 0 0;
+}
+
+.users-table {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 20px
+}
+.users-table td {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    font-size: 12px
+}
+.users-table th {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    text-align: center;
+    font-size: 12px
+}

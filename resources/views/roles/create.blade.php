@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('dashboard.main')
 
 @section('title', '| Add Role')
 
-@section('content')
+@section('content-page')
 
-<div class='col-lg-4 col-lg-offset-4'>
+<div class='col-lg-8 col-lg-offset-2'>
 
     <h3>Create Role</h3>
     

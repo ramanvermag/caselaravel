@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('dashboard.main')
 
 @section('title', '| Edit User')
 
-@section('content')
+@section('content-page')
 
-<div class='col-lg-8 col-lg-offset-2'>
+<div class='col-lg-12'>
             <div class="adduserform">
             <div class="col-md-12">
             <h3> Edit {{$user->name}}  </h3>

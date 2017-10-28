@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('dashboard.main')
 
 @section('title', '| Create Permission')
 
-@section('content')
+@section('content-page')
 
-    <div class='col-lg-8 col-lg-offset-2'>
+    <div class='col-lg-12'>
     {{-- @include ('errors.list') --}}
 
     <h3>Edit Permission <b>{{$permission->name}}</b>  </h3>

@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('dashboard.main')
 
 @section('title', '| Roles')
 
-@section('content')
+@section('content-page')
 
-<div class="col-lg-10 col-lg-offset-1">
+<div class="col-lg-12">
     <h3>All Roles
 <!-- 
     <a href="{{ route('users.index') }}" class="btn btn-default pull-right">Users</a>

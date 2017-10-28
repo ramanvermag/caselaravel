@@ -26,7 +26,11 @@ class DashboardController extends Controller
     public function index()
     {
         
+        // $routes = $request->session()->get('allowed_routes');
 
+        //print_r($routes);
+        //die;
+        
         return view('dashboard.index');
     }
 

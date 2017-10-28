@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Session;
 
 
 use Illuminate\Support\Facades\DB;
@@ -79,6 +79,7 @@ class ClearanceMiddleware {
          // /die();
         if (in_array($user_wants_to_access, $allowed_routes)) 
         {
+            Session::put('allowed_routes', $allowed_routes);
 
             return $next($request);
         }

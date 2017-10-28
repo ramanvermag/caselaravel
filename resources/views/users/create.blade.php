@@ -2,9 +2,25 @@
 
     @section('title', '| Add User')
 
-        @section('content')
+        @section('content-page')
 
-            <div class='col-lg-8 col-lg-offset-2'>
+
+
+
+    <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Data Tables
+        <small>advanced tables</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
+      </ol>
+    </section>
+
             <div class="adduserform">
             <div class="col-md-12">
             <h3> Add User</h3>
@@ -111,5 +127,6 @@
             {{ Form::close() }}
 
             </div>
-            </div>
+        </div>
+        
 @endsection

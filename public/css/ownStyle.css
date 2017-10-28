@@ -1,0 +1,24 @@
+.skin-purple .wrapper {background: #ffffff none repeat scroll 0 0;}
+.login-page, .register-page {background: #ffffff none repeat scroll 0 0;}
+.error-login {background: rgba(0, 0, 0, 0.04) none repeat scroll 0 0;color: #d50000;padding: 10px;text-align: center;width: 100%;}
+.error-pwd-reset {color: #d50000;}
+.login-btn-lcl {background: #605ca8 none repeat scroll 0 0;border: 1px solid #504ca8;}
+.login-btn-lcl:hover {background: #4641a0;}
+.login-box-body .btn.btn-link {color: #4641a0;margin: 0;padding: 0;}
+.pwd-reset {margin: 50px 0 0;}
+.pwd-reset .box.box-info {
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    border-top-color: #605ca8;
+}
+.back-to-login {
+    display: inline-block;
+    margin: -3px;
+    padding: 10px 0 0 2px;
+}
+.back-to-login a{
+color: #bbb;
+}
+.back-to-login a:hover{
+color: #aaa;
+}

@@ -34,6 +34,10 @@ class ProfileController extends Controller
 
         $user_data = User::where('id','=', Auth::id())->with('roles') -> first();
 
+
+        // print_r($user_data->profile_picture);
+        // die;
+
         $created_at = (array)$user_data->created_at;
 
         $user_properties['id']     = $user_data->id;
