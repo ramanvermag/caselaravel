@@ -26,7 +26,7 @@
 
                                         @if(isset($properties['profile_picture']))
                                             
-                                            <img  src="{{asset('user_profile_pics')}}/{{ $properties['id'] }}/profile/{{ $properties['profile_picture'] }}">
+                                            <img  src="{{ asset('user_profile_pics')}}/{{Auth::user()->id}}/profile/image.png">
 
                                         @else
                                             

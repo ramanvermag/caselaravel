@@ -35,19 +35,32 @@ use Spatie\Permission\Models\Role;
     Route::get('activateUser/{id}','UserController@activateUser');
     Route::get('delete','UserController@index'); // pervent direct access
     Route::get('profile','ProfileController@index'); // pervent direct access
-
+    
+    Route::get('deleteCaselaw/{id}','CaselawController@delete'); 
 
     Route::post('searchUsers','UserController@searchUsers');
     Route::post('deleteusers','UserController@deleteusers');
     Route::post('bulkaction','UserController@BulkAction');
     Route::post('profile', 'UserController@update_avatar');
 
-
     Route::resource('users','UserController');
+    Route::resource('caselaws','CaselawController');
+    Route::resource('message','MessageController');
+    Route::resource('baract','BaractController');
+    Route::resource('chapter','ChapterController');
+    Route::resource('section','SectionController');
     Route::resource('roles','RoleController');
+
     Route::resource('permissions','PermissionController');
     Route::resource('posts','PostController');
     Route::resource('profile','ProfileController');
+
+
+
+	Route::get('/test', 'ChapterController@testfunction');
+	Route::post('/test', 'ChapterController@testfunction');
+
+
 
 
 	Route::any('/search',function(){

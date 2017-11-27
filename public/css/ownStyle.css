@@ -1,24 +1,39 @@
 .skin-purple .wrapper {background: #ffffff none repeat scroll 0 0;}
 .login-page, .register-page {background: #ffffff none repeat scroll 0 0;}
-.error-login {background: rgba(0, 0, 0, 0.04) none repeat scroll 0 0;color: #d50000;padding: 10px;text-align: center;width: 100%;}
+.error-login {color: #d50000;padding: 10px;text-align: center;width: 100%;}
 .error-pwd-reset {color: #d50000;}
 .login-btn-lcl {background: #605ca8 none repeat scroll 0 0;border: 1px solid #504ca8;}
 .login-btn-lcl:hover {background: #4641a0;}
 .login-box-body .btn.btn-link {color: #4641a0;margin: 0;padding: 0;}
 .pwd-reset {margin: 50px 0 0;}
-.pwd-reset .box.box-info {
-    border-left: 1px solid #eeeeee;
-    border-right: 1px solid #eeeeee;
-    border-top-color: #605ca8;
+.pwd-reset .box.box-info {border-left: 1px solid #eeeeee;border-right: 1px solid #eeeeee;border-top-color: #605ca8;}
+.back-to-login {display: inline-block;}
+.back-to-login a{color: #bbb;}
+.back-to-login a:hover{color: #aaa;}
+#create-user-form .form-group {margin-bottom: 8px;}
+#create-user-form .user-image-perview {height: 50px;}
+.search-box-part {display: inline;float: left;margin: 0;padding: 0;}
+.user-img {border-radius: 50%;height: 40px;width: 40px;}
+.old-user-image-perview-pic {width: 70px;}
+.table-permissions-listing .btn.btn-danger {margin-right: 5px;}
+.method-get{background: #1cba10;}
+.method-head{background: #1c1a13;}
+.method-post {background: #e5c916;}
+.method-put {background: #6708af;}
+.method-patch {background: #162ee0;}
+.method-delete{background: #c10f0f;}
+.text-muted.eg-text > small {float: left;margin: 0 0 10px;width: 100%;}
+.bs-callout {padding: 20px;margin: 20px 0;border: 1px solid #eee;border-left-width: 5px;border-radius: 3px;}
+.del-caselaw,.del-message{margin-right: 5px}
+.create-role{ margin-right: 5px }
+.btn-del-role{ margin-right: 5px }
+.form-group .delete-it {
+    background: #ddd !important;
+    text-decoration: line-through;
+    border: 1px solid rgb(244, 95, 65);
+    color: rgb(244, 95, 65) !important;
 }
-.back-to-login {
-    display: inline-block;
-    margin: -3px;
-    padding: 10px 0 0 2px;
-}
-.back-to-login a{
-color: #bbb;
-}
-.back-to-login a:hover{
-color: #aaa;
-}
+.label-info{border: 1px solid #00C0EF}
+.chapter-del-checkbox{visibility: hidden;}
+.label-info.del-chkbox-lbl {margin-bottom: 10px;display: inline-block;padding: 7px 13px;font-size: 12px;cursor: pointer}
+

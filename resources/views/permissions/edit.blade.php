@@ -2,9 +2,31 @@
 
 @section('title', '| Create Permission')
 
-@section('content-page')
+@section('content-of-user')
 
-    <div class='col-lg-12'>
+
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1> Blank page <small>it all starts here</small> </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Examples</a></li>
+            <li class="active">Blank page</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Title</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"> <i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"> <i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class='col-lg-12'>
     {{-- @include ('errors.list') --}}
 
     <h3>Edit Permission <b>{{$permission->name}}</b>  </h3>
@@ -37,10 +59,10 @@
                     <ul class="routlist">
                     <?php
 
-                    $appCompleteRouteNames 	   = [];
+                    $appCompleteRouteNames     = [];
                     $allowedCompleteRouteNames = [];
                     foreach ($route_list as  $singleAppRouteData) 
-                    {	
+                    {   
                         $appRouteName    = $singleAppRouteData['uri'];
                         $appRouteMethods = $singleAppRouteData['method'];
                         
@@ -61,9 +83,9 @@
                             $route_data = explode("@", $value);
                             ?>
                             <li>
-                                <span class="sr-no-route">[<?php echo $sr; ?>] </span>
+                                <!-- <span class="sr-no-route">[<?php //echo $sr; ?>] </span> -->
                                 <input class="route-name-input" type="checkbox" name="{{$value}}" checked>
-                                <label class="route-name"><span>{{$route_data['0']}}</span> <em>{{$route_data['1']}}</em></label>	
+                                <label class="route-name"><span>{{$route_data['0']}}</span> <em>{{$route_data['1']}}</em></label>   
                             </li>
                             <?php
                             }
@@ -72,9 +94,9 @@
                                 $route_data = explode("@", $value);
                             ?>
                             <li>
-                                <span class="sr-no-route">[<?php echo $sr; ?>] </span>
+                                <!-- <span class="sr-no-route">[<?php //echo $sr; ?>] </span> -->
                                 <input class="route-name-input" type="checkbox" name="{{$value}}" >
-                                <label class="route-name"><span>{{$route_data['0']}}</span> <em>{{$route_data['1']}}</em></label>	
+                                <label class="route-name"><span>{{$route_data['0']}}</span> <em>{{$route_data['1']}}</em></label>   
                             </li>
                             <?php
                         }
@@ -89,5 +111,24 @@
     {{ Form::submit('Edit Permission', array('id'=>"edit-permission-submit", 'class' => 'btn btn-primary edit-permission-submit')) }}
     {{ Form::close() }}
     <br>
-    </div>
+</div>
+                
+            </div>
+            <div class="box-footer"> Footer </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+    
+    <!-- Main content -->
+
+
 @endsection

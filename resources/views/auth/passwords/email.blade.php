@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content-not-auth')
+@section('content-of-guest')
 <div class="pwd-reset">
 
 
@@ -51,7 +51,7 @@
               <div class="box-footer">
                 <!-- <button type="submit" class="btn btn-info pull-right">Reset Password</button> -->
                 <span class="back-to-login">
-                    <a class="text-center" href="{{url('/')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to login</a>
+                    <a class="text-center pull-right btn btn-default" href="{{url('/')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to login</a>
                 </span>
                 <button type="submit" class="btn btn-info pull-right">Send password reset link</button>
               </div>

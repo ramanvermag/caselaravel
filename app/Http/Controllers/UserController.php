@@ -30,8 +30,7 @@ class UserController extends Controller
     public function index()
     {
     	
-
-        $users = User::where('id','!=', Auth::id())->where('delete_status','!=', 1)->with('roles')->paginate(10); 
+        $users = User::where('id','!=', Auth::id())->where('delete_status','!=', 1)->with('roles')->paginate(5); 
         $roles = Role::get();   
         return view('users.index', compact('users', 'roles'));
     }
@@ -216,11 +215,11 @@ class UserController extends Controller
         $this->validate($request, [
             'name'=>'required|max:120',
             'email'=>'required|email|unique:users,email,'.$id,
-            'phone'=>'required|unique:users,phone,'.$id,
+            // 'phone'=>'required|unique:users,phone,'.$id,
 
             // 'name'                => 'required',
             // 'email'               => 'required|email|unique:users',
-            // 'phone'               => 'required|regex:/[0-9]/|size:10|unique:users',
+            'phone'               => 'required',
             'residential_address' => 'required',
             'pincode'             => 'required|numeric|digits_between:0,6',
             'dob'                 => 'required|date',
@@ -301,8 +300,8 @@ class UserController extends Controller
 
             
         }
-        return redirect()->route('users.index')
-            ->with('flash_message',
+        return redirect()->back()
+            ->with('message',
              'User successfully edited.');
     }
 

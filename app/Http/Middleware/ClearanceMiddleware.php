@@ -22,7 +22,7 @@ class ClearanceMiddleware {
      */
     public function handle($request, Closure $next) 
     {
-        
+        /*
         $allowed_routes_data = [];
 
         $user  = Auth::user();
@@ -30,9 +30,7 @@ class ClearanceMiddleware {
         $roles = $user->roles->toArray();
         
 
-        // $uri = \Request::path(); 
-
-       // print_r($roles);
+       
 
         foreach ($roles as $role) 
         {
@@ -87,6 +85,7 @@ class ClearanceMiddleware {
         {
              abort('401');
         }
+        */
 
         return $next($request);
         

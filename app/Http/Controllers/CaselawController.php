@@ -13,8 +13,9 @@ class CaselawController extends Controller
     
     public function __construct()
     {
-        $this->middleware(['auth', 'clearance'])
-            ->except('index', 'show');
+   
+        $this->middleware(['auth'])
+             ->except('index', 'show');
     }
 
     /**
@@ -25,10 +26,10 @@ class CaselawController extends Controller
     
 
     public function index()
-    {
-       
-        $caselaws = Caselaw::orderby('id', 'desc')->paginate(5);
-        return view('caselaw.index', compact('caselaws'));
+    {       
+        $caselaws = Caselaw::orderby('id', 'desc')->paginate(10);
+        $total = count($caselaws);
+        return view('caselaw.index', compact('caselaws', 'total'));
     }
 
     /**
@@ -38,7 +39,7 @@ class CaselawController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('caselaw.create');
     }
 
     /**
@@ -49,19 +50,17 @@ class CaselawController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title'=>'required|max:100',
-            'body' =>'required',
-            ]);
+        $this->validate($request, ['title'       => 'required|max:100',
+                                   'description' => 'required',
+                                   'link'        => 'required',]);
 
         $title = $request['title'];
-        $body = $request['body'];
+        $body = $request['description'];
 
-        $post = Post::create($request->only('title', 'body'));
+        $caselaw = Caselaw::create($request->only('title', 'description','link'));
 
-        return redirect()->route('posts.index')
-            ->with('flash_message', 'Article,
-             '. $post->title.' created');
+        return redirect()->route('caselaws.index')
+            ->with('message', 'Caselaw '. $caselaw->title.' Successfully added!');
     }
 
     /**
@@ -72,9 +71,12 @@ class CaselawController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        // die('ddfdfd');
+        $caselaw = Caselaw::findOrFail($id);
+        // print_r($caselaw);
+        // die;
 
-        return view ('posts.show', compact('post'));
+        return view ('caselaw.show', compact('caselaw'));
     }
 
     /**
@@ -85,9 +87,9 @@ class CaselawController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $caselaw = Caselaw::findOrFail($id);
 
-        return view('posts.edit', compact('post'));
+        return view('caselaw.edit', compact('caselaw'));
     }
 
     /**
@@ -99,19 +101,22 @@ class CaselawController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
         $this->validate($request, [
             'title'=>'required|max:100',
-            'body'=>'required',
+            'description'=>'required',
+            'link'=>'required|url',
         ]);
 
-        $post = Post::findOrFail($id);
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->save();
+        $caselaw = Caselaw::findOrFail($id);
+        $caselaw->title = $request->input('title');
+        $caselaw->description = $request->input('description');
+        $caselaw->link = $request->input('link');
+        $caselaw->save();
 
-        return redirect()->route('posts.show', 
-            $post->id)->with('flash_message', 
-            'Article, '. $post->title.' updated');
+        
+        return redirect()->back()->with('message', 'Successfully updated!');
     }
 
     /**
@@ -122,11 +127,19 @@ class CaselawController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
-        $post->delete();
+        die('here');
+        $Caselaw = Caselaw::findOrFail($id);
+        $deleted_Caslaw_title = $caselaw->title;
+        $Caselaw->delete();
 
-        return redirect()->route('posts.index')
-            ->with('flash_message',
-             'Article successfully deleted');
+    return redirect()->route('caselaws.index')->with('message', 'Caselaw '. $deleted_Caslaw_title.' Successfully Deleted!');
+    }
+    public function delete($id)
+    {
+        $Caselaw = Caselaw::findOrFail($id);
+        $deleted_Caslaw_title = $Caselaw->title;
+        $Caselaw->delete();
+        return redirect()->route('caselaws.index')->with('message', 'Caselaw '. $deleted_Caslaw_title.' Successfully Deleted!');
+
     }
 }

@@ -3,7 +3,7 @@
 
     @section('title', '| user profile')
 
-        @section('content-page')
+        @section('content-of-user')
 
 
 

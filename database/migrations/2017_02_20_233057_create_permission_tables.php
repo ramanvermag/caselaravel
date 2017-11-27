@@ -23,6 +23,7 @@ class CreatePermissionTables extends Migration
         Schema::create($config['permissions'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->text('allowed_routes');
             $table->timestamps();
         });
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content-not-auth')
+@section('content-of-guest')
 
 
 
@@ -86,7 +86,7 @@
 
 
 </div>
-
+<a href="{{ url('/register') }}">Register</a>
 
 
 

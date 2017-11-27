@@ -19,7 +19,7 @@ class RoleController extends Controller
 
     public function __construct() 
     {
-        $this->middleware(['auth', 'isAdmin']);
+        $this->middleware(['auth']);
     }
 
 
@@ -39,6 +39,8 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
+
+        // die('hgfdgfdhjghj');
 
         return view('roles.create', ['permissions'=>$permissions]);
     }
